@@ -494,7 +494,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPerformance: 0.75
   maxTrialNum: 100
-  stepSize: 6
+  trialNum: 1
+  stepSize: 1
   targetReversalNum: 6
   targetOfChange: 1
   discardReversalNum: 2
@@ -1072,7 +1073,7 @@ MonoBehaviour:
   signal: {fileID: 620441889}
   noise: {fileID: 2067397009}
   TEN: {fileID: 8300000, guid: da23ce74b0020b542b293378507c6da9, type: 3}
-  probability: 0.5
+  probability: 0.75
   noiseLength: 0
   noisePlayLength: 2
   signalWaitTime: 1

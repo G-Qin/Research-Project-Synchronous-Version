@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SIAMManager : MonoBehaviour
 {
     public float targetPerformance;
-    public int maxTrialNum;
+    public int maxTrialNum, trialNum = 0;
     public int stepSize;  
     public int targetReversalNum, targetOfChange, discardReversalNum;
     public int incrementOfDecibel;
@@ -15,7 +15,7 @@ public class SIAMManager : MonoBehaviour
     public Button playSoundBtn, noBtn, yesBtn, finishBtn;  
     [SerializeField]
     private float _volume = 1f, totalVol = 0f;
-    private int reversalNum = 0, trialNum = 0, trialNumAvg = 0;
+    private int reversalNum = 0,  trialNumAvg = 0;
     private bool signalExist = false, volIncrease = false;
     void Start()
     {
@@ -25,7 +25,7 @@ public class SIAMManager : MonoBehaviour
 
     public void PlaySound(bool exist)
     {       
-        dataLogger.GetComponent<DataLoggerScript>().LogVolume(volume);
+        dataLogger.GetComponent<DataLoggerScript>().LogVolume(LinearToDecibel(volume));
         playSoundTxt.GetComponent<PlaySoundTxtScript>().AwakeOnPlaySound();
         signalExist = exist;
     }
@@ -59,7 +59,7 @@ public class SIAMManager : MonoBehaviour
             Debug.Log("Reversal");
         }
         if (reversalNum == targetOfChange) {
-            targetPerformance = 0.5f;
+            playSoundBtn.GetComponent<PlaySdBtnScript>().probability = 0.5f;
         }
         if (reversalNum >= targetReversalNum) {
             TerminateProcedure();
@@ -100,7 +100,7 @@ public class SIAMManager : MonoBehaviour
         playSoundBtn.GetComponent<PlaySdBtnScript>().signal.mute = true;
         // Logging and interface update
         playSoundTxt.SetActive(false);
-        dataLogger.GetComponent<DataLoggerScript>().LogFinishedProcedure(avgVol);
+        dataLogger.GetComponent<DataLoggerScript>().LogFinishedProcedure(LinearToDecibel(avgVol));
         trialText.GetComponent<Text>().text = "SIAM Procedure Finished.";
         finishBtn.GetComponent<FinishBtnScript>().AwakeAtFinish();
         PlayerPrefs.SetFloat("SignalVolume", avgVol);

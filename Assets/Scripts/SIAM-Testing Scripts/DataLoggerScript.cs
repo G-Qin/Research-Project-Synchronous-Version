@@ -31,7 +31,7 @@ public class DataLoggerScript : MonoBehaviour
 
     public void LogVolume(float volume){
         using (writer = new StreamWriter(path, append:true)){
-            writer.Write("Volume: " + volume.ToString() + "  ");
+            writer.Write("Level: " + volume.ToString() + "  ");
         }
     }
 
@@ -55,7 +55,7 @@ public class DataLoggerScript : MonoBehaviour
 
     public void LogFinishedProcedure(float volume){
         using (writer = new StreamWriter(path, append:true)){
-            writer.WriteLine("Finished Procedure, volume: " + volume);
+            writer.WriteLine("Finished Procedure, avg level: " + volume);
         }
     }
 }

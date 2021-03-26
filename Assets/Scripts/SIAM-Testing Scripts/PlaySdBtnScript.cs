@@ -30,10 +30,15 @@ public class PlaySdBtnScript : MonoBehaviour
         // Yes/No button will show up after the noise
         StartCoroutine(PlayNoiseAndShowButtons());
         if (willPlay < probability) {
-            signalExist = true;
-            StartCoroutine(WaitAndPlaySignal());
+            signalExist = true;            
         } else {
             signalExist = false;
+        }
+        if (manager.GetComponent<SIAMManager>().trialNum == 1){
+            signalExist = true;
+        }
+        if (signalExist){
+            StartCoroutine(WaitAndPlaySignal());
         }
         manager.GetComponent<SIAMManager>().PlaySound(signalExist);
     }
