@@ -33,6 +33,7 @@ public class NewSIAMManager : MonoBehaviour
         reversalNum = 0;
         savedTrialNum = 0;
         // Interface adjustments
+        backBtn.interactable = false;
         yesBtn.interactable = false;
         noBtn.interactable = false;
         finishBtn.interactable = false;
@@ -42,6 +43,7 @@ public class NewSIAMManager : MonoBehaviour
 
     public void StartProcedure()
     {
+        backBtn.interactable = true;
         startBtn.interactable = false;
         dataLogger.GetComponent<DataLoggerScript>().NewSIAMDataFile();
         StartCoroutine(SIAMProcedure());
@@ -71,14 +73,14 @@ public class NewSIAMManager : MonoBehaviour
             yesBtn.interactable = true;
             noBtn.interactable = true;
             // Wait for user response
-            yield return new WaitUntil(() => answered);
-            // Update the volume for next trial based on current response
-            UpdateVolumeAndReversal();
+            yield return new WaitUntil(() => answered);            
             // Log data
             dataLogger.GetComponent<DataLoggerScript>()
                 .LogVolume(LinearToDecibel(signal.volume));
             dataLogger.GetComponent<DataLoggerScript>().LogTrialNumber(trialNum);
             dataLogger.GetComponent<DataLoggerScript>().LogResponse(response);
+            // Update the volume for next trial based on current response
+            UpdateVolumeAndReversal();
             // Increment trial number
             trialNum ++;
         }
