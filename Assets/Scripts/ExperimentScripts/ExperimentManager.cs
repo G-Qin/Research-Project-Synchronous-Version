@@ -29,6 +29,8 @@ public class ExperimentManager : MonoBehaviour
         cardCover.SetActive(true);
         // Load the volume from SIAM, otherwise it will be 0.5 by default
         volume = PlayerPrefs.GetFloat("SignalVolume");
+        // For debug use
+        Debug.Log(volume);
         signal.volume = volume;
         // Yes/No button cannot be accessed until noise ends
         yesBtn.interactable = false;
