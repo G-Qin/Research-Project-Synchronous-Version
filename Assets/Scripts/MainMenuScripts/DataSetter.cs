@@ -11,5 +11,9 @@ public class DataSetter : MonoBehaviour
         if (!PlayerPrefs.HasKey("SignalVolume")){
             PlayerPrefs.SetFloat("SignalVolume", 0.5f);
         }
+        // Disable the experiment button if no SIAM has been run
+        if (!PlayerPrefs.HasKey("SIAMDone")){
+            PlayerPrefs.SetInt("SIAMDone", 0);
+        }
     }
 }
